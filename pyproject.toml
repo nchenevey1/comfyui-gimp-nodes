@@ -1,0 +1,17 @@
+[project]
+name = "comfyui-gimp-nodes"
+description = "Provides nodes geared towards using GIMP as a frontend for ComfyUI."
+version = "1.0.0"
+license = { file = "LICENSE" }
+
+[project.urls]
+Repository = "https://github.com/nchenevey1/gimp-comfy-tools"
+
+[tool.black]
+line-length = 100
+preview = true
+
+[tool.comfy]
+PublisherId = "nchenevey1"
+DisplayName = "comfyui-gimp-nodes"
+Icon = ""
