@@ -1,6 +1,7 @@
 # ComfyUI Nodes for External Tooling Modified for GIMP
 
-Provides nodes geared towards using GIMP as a frontend for ComfyUI. Modified from https://github.com/Acly/comfyui-tooling-nodes, thank you Acly.
+* Provides nodes geared towards using GIMP as a frontend for ComfyUI. Modified from https://github.com/Acly/comfyui-tooling-nodes, thank you Acly.
+* What changed: Load Image, Load Mask, and Send Image were modified to send, receive, and process base64 encoded RGBA data rather than base64 encoded PNG data.
 
 * <a href="#images">Sending and receiving images</a>
 * <a href="#installation">Installation</a>
