@@ -35,6 +35,21 @@ That is one 32-bit integer (big endian) with value 12 followed by the base64 enc
 ```
 You can see how the data is received in the GIMP plugin at https://github.com/nchenevey1/gimp-comfy-tools
 
+### Send Image with Dimensions GIMP (WebSocket)
+
+Sends an output image over the client WebSocket connection as RGBA data.
+* Inputs: the image (RGB or RGBA)
+
+This will send one base64 encoded message for the image via WebSocket:
+```
+14<RGBA-data>
+```
+That is one 32-bit integer (big endian) with value 14 followed by the base64 encoded Width (32 bit), Height (32 bit), and RGBA binary data. There is also a JSON message afterwards:
+```
+{'type': 'executed', 'data': {'node': '<node ID>', 'output': {'images': [{'source': 'websocket', 'content-type': 'image/png', 'type': 'output'}, ...]}, 'prompt_id': '<prompt ID>}}
+```
+You can see how the data is received in the GIMP plugin at https://github.com/nchenevey1/gimp-comfy-tools
+
 ## <a id="installation" href="#toc">Installation</a>
 
 Download the repository and unpack into the `custom_nodes` folder in the ComfyUI installation directory.
