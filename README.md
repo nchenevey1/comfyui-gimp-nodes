@@ -42,7 +42,7 @@ Sends an output image over the client WebSocket connection as RGBA data.
 
 This will send one base64 encoded message for the image via WebSocket:
 ```
-14<RGBA-data>
+14<width><height><RGBA-data>
 ```
 That is one 32-bit integer (big endian) with value 14 followed by the base64 encoded Width (32 bit), Height (32 bit), and RGBA binary data. There is also a JSON message afterwards:
 ```
