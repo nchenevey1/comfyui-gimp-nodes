@@ -1,7 +1,7 @@
 [project]
 name = "comfyui-gimp-nodes"
 description = "Provides nodes geared towards using GIMP as a frontend for ComfyUI."
-version = "1.0.0"
+version = "1.1.0"
 license = { file = "LICENSE" }
 
 [project.urls]
