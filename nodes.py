@@ -111,3 +111,46 @@ class SendImageWebSocketGIMP:
             )
 
         return {"ui": {"images": results}}
+    
+class SendImageDimsWebSocketGIMP:
+    @classmethod
+    def INPUT_TYPES(s):
+        return {"required": {
+            "images": ("IMAGE",)
+            }
+        }
+
+    RETURN_TYPES = ()
+    FUNCTION = "send_images"
+    OUTPUT_NODE = True
+    CATEGORY = "external_tooling"
+
+    def send_images(self, images):
+        results = []
+        for tensor in images:
+            array = 255.0 * tensor.cpu().numpy() 
+            image = Image.fromarray(np.clip(array, 0, 255).astype(np.uint8))
+
+            image_width, image_height = image.size
+            width_bytes = image_width.to_bytes(4, byteorder='big', signed=False)
+            height_bytes = image_height.to_bytes(4, byteorder='big', signed=False)
+        
+            rgb_data = Image.new("RGBA", image.size, (255, 255, 255, 0))
+            rgb_data.paste(image)
+            image_bytes = rgb_data.tobytes()
+            image_bytes = base64.b64encode(image_bytes)
+            image_bytes = width_bytes + height_bytes + image_bytes
+
+            server = PromptServer.instance
+            server.send_sync(
+                14,
+                image_bytes,
+                server.client_id,
+            )
+
+            results.append(
+                # Could put some kind of ID here, but for now just match them by index
+                {"source": "websocket", "content-type": "image/png", "type": "output"}
+            )
+
+        return {"ui": {"images": results}}
